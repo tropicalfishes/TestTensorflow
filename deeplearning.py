@@ -60,8 +60,8 @@ class CDeepLearningBase(object):
 		init_all_var = tf.global_variables_initializer()
 		sess.run(init_all_var)
 		print("初始参数为：W=%s, b=%s" % (sess.run(self.W), sess.run(self.b)))
-		coord = tf.train.Coordinator()
-		threads = tf.train.start_queue_runners(sess=sess, coord=coord)
+		# coord = tf.train.Coordinator()    # 线程管理相关，没什么用
+		# threads = tf.train.start_queue_runners(sess=sess, coord=coord)
 		training_steps = 10000
 		for step in range(training_steps):
 			sess.run([train_op])
@@ -70,6 +70,7 @@ class CDeepLearningBase(object):
 
 		print("训练结束：参数:W=%s, b=%s" % (sess.run(self.W), sess.run(self.b)))
 		self.Evaluate(sess, X, Y)
-		coord.request_stop()
-		coord.join(threads)
+		writer = tf.summary.FileWriter("tensorboard", sess.graph)
+		# coord.request_stop()
+		# coord.join(threads)
 		sess.close()
