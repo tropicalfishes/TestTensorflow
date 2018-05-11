@@ -1,0 +1,4 @@
+https://tensorflow.google.cn/ 203.208.41.55
+https://www.tensorflow.org 74.125.204.101
+
+域名访问不行可以直接改host用ip访问试试。
