@@ -6,7 +6,11 @@ import deeplearning
 def Main():
 	# test_deep_learning = TestDeepLearning()
 	# test_deep_learning.DoLearning()
-	TestTFApi()
+
+	# TestTFApi()
+
+	import iris_recognition
+	iris_recognition.main()
 
 
 def TransData():
