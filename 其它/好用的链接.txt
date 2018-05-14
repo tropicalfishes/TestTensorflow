@@ -1,0 +1,2 @@
+https://developers.google.com/machine-learning/glossary/ 机器学习术语表
+https://developers.google.com/machine-learning/crash-course/ 机器学习速成课程

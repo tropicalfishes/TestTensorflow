@@ -20,17 +20,34 @@ def main():
 		# Two hidden layers of 10 nodes each.
 		hidden_units=[10, 10],
 		# The model must choose between 3 classes.
-		n_classes=len(LABEL_KEY))
+		n_classes=len(LABEL_KEY),
+		model_dir="iris_recognition_model",
+	)
 
 	train_feature, train_label = Input()
 	# Train the Model.
 	classifier.train(
-		input_fn=lambda:train_input_fn(train_feature, train_label, 1),
+		input_fn=Input,
 		steps=train_steps)
 
 	# Evaluate the Model.
 	evaluate_feature, evaluate_label = input_evaluation_set()
-	classifier.evaluate(input_fn=lambda :evaluate_input_fn(evaluate_feature, evaluate_label))
+	print("看看评估的输入：", evaluate_feature)
+	print("评估的label", evaluate_label)
+	evaluate_result = classifier.evaluate(input_fn=input_evaluation_set, steps=10)
+	print("评估结束，结果：", evaluate_result)
+	
+	# 预测
+	features = {'SepalLength': np.array([6.4, 5.0]),
+	            'SepalWidth': np.array([2.8, 2.3]),
+	            'PetalLength': np.array([5.6, 3.3]),
+	            'PetalWidth': np.array([2.2, 1.0])}
+	labels = np.array([2, 1])
+	predict_result = classifier.predict(
+		input_fn=lambda : features,
+	)
+	for i in range(4):
+		print("预测结果：", predict_result.__next__())
 
 def input_evaluation_set():
 	features = {'SepalLength': np.array([6.4, 5.0]),
